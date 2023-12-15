@@ -68,8 +68,8 @@ export const getOneKaroke = asyncHandler(async (req, res) => {
 
   if (song) {
     const b2 = new B2({
-      applicationKeyId: "0052c2a0b5522bb0000000002",
-      applicationKey: "K005jyb/VmKHwQZqNFuFCybJ7HnArqU",
+      applicationKeyId: "005d5ef51a9061c0000000002",
+      applicationKey: "K0059zvkb1yu0WPALKZg9AEKMjQWiUg",
     });
     await b2.authorize();
     const responseId = await b2.downloadFileById({
@@ -128,13 +128,13 @@ export const createKarokeTrack = asyncHandler(async (req, res, next) => {
 
 export const uploadToBackBlaze = async (req, res, next) => {
   const b2 = new B2({
-    applicationKeyId: "0052c2a0b5522bb0000000002",
-    applicationKey: "K005jyb/VmKHwQZqNFuFCybJ7HnArqU",
+    applicationKeyId: "005d5ef51a9061c0000000002",
+    applicationKey: "K0059zvkb1yu0WPALKZg9AEKMjQWiUg",
   });
 
   await b2.authorize();
 
-  const bucketId = "a2eca22a104b459582c20b1b";
+  const bucketId = "cd05fe2f65516a9980c6011c";
 
   let uid = uuidv4();
 
