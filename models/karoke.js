@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const karokeSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
   },
   audio: {
     type: String,

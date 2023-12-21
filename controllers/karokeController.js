@@ -1,5 +1,5 @@
 import asyncHandler from "#middlewares/asyncHandler";
-import { MP3, PATH, MPEG, XML } from "#constant/constant";
+import { MP3, PATH,LIVEPATH, MPEG, XML } from "#constant/constant";
 import { Karoke } from "#models/karoke";
 import B2 from "backblaze-b2";
 import rp from "request-promise";
@@ -124,6 +124,22 @@ export const createKarokeTrack = asyncHandler(async (req, res, next) => {
   // });
 
   await uploadToBackBlaze(req, res, next);
+});
+
+
+export const createSongFile = asyncHandler(async (req, res, next) => {
+  let songFile = req.files?.song?.[0]
+
+  let song = await new Karoke(req.body);
+
+  song.audio = `${LIVEPATH}uploads/${songFile?.filename}`;
+
+  song.save();
+
+  return res
+  .status(201)
+  .json({ status: true, message: "Karoke Created Successfully", song });
+
 });
 
 export const uploadToBackBlaze = async (req, res, next) => {

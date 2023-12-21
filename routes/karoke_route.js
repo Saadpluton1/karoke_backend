@@ -1,6 +1,6 @@
 import express from "express";
 import {multerAudioUpload} from "#utils/multer";
-import { createKarokeTrack, getAllKaroke, getOneKaroke } from "#controllers/karokeController";
+import { createKarokeTrack,createSongFile, getAllKaroke, getOneKaroke } from "#controllers/karokeController";
 
 
 const karokeRoute = express.Router();
@@ -17,6 +17,14 @@ karokeRoute.post("/karoke",multerAudioUpload.fields([
   }])
   , createKarokeTrack);
 
+// Create Karoke
+karokeRoute.post("/karoke-upload",multerAudioUpload.fields([
+  {
+    name: "song",
+    maxCount: 1,
+  }])
+  , createSongFile);
+  
 // Admin All Karoke
 karokeRoute.get("/karoke", getAllKaroke);
 
