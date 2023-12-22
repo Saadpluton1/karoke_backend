@@ -76,7 +76,10 @@ const checkAudioAndImageType = (req, file, cb) => {
   
 
   const checkAudioType = (req, file, cb) => {
-    if ([MP3, MPEG,XML].includes(file?.mimetype)) {
+
+    const supportedFormats = ['audio/mp3', 'audio/mpeg', 'application/xml', 'audio/wav'];
+
+    if (supportedFormats.includes(file?.mimetype)) {
       cb(null, true);
     } else {
       cb(
