@@ -1,7 +1,7 @@
 import path, {dirname, join} from "path";
 import {fileURLToPath} from "url";
 import multer from "multer";
-import { PNG, JPG, JPEG, MP3, MPEG ,XML } from "#constant/constant";
+import { PNG, JPG, JPEG, MP3, MPEG ,XML,WAV } from "#constant/constant";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -27,12 +27,14 @@ const multerUpload = multer({
 });
 
 
+const allowAllFilter = (req, file, cb) => {
+  cb(null, true);
+};
 const multerAudioUpload = multer({
-    storage,
-    fileFilter: function (req, file, cb) {
-        checkAudioType(req, file, cb)
-    },
+  storage,
+  fileFilter: allowAllFilter,
 });
+
 
 const multerAudioAndImageUpload = multer({
   storage,
@@ -72,14 +74,10 @@ const checkAudioAndImageType = (req, file, cb) => {
     }
   };
 
-
   
 
   const checkAudioType = (req, file, cb) => {
-
-    const supportedFormats = ['audio/mp3', 'audio/mpeg', 'application/xml', 'audio/wav'];
-
-    if (supportedFormats.includes(file?.mimetype)) {
+    if ([MP3, MPEG,XML,WAV].includes(file?.mimetype)) {
       cb(null, true);
     } else {
       cb(
